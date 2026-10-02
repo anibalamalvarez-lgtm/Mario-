@@ -1,37 +1,41 @@
-const mario = documet.querySelector(.mario)
-const pipe = documet.querySelector(.pipe)
+const mario = document.querySelector('.mario');
+const pipe = document.querySelector('.pipe');
 
 const jump = () => {
-    mario.classList.add('jump')
+    // Evita volver a saltar si ya está ejecutando la animación
+    if (mario.classList.contains('jump')) return;
+
+    mario.classList.add('jump');
 
     setTimeout(() => {
-        mario.classList.remove('jump')
-    }, 500)
-}
+        mario.classList.remove('jump');
+    }, 500);
+};
 
-constloop = setInterval(() => {
+const loop = setInterval(() => {
+    const pipePosition = pipe.offsetLeft;
+     //Convierte el valor 'Xpx' de la propiedad bottom a un número
+    const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
-    console.log('loop')
+    // Detecta la colisión entre el tubo y Mario
+    if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
 
-  const pipePosition = pipe.offsetLef;
-  const marioPosition = +mario.getComputedstyle(mario).bottom.replace('px', '');
+        // Detiene la animación del tubo y fija su posición horizontal
+        pipe.style.animation = 'none';
+        pipe.style.left = `${pipePosition}px`;
 
-if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
+        // Detiene la animación de Mario y fija su posición vertical
+        mario.style.animation = 'none';
+        mario.style.bottom = `${marioPosition}px`; // CORREGIDO: Usar bottom, no left
 
-    pipe.style.animation = 'none';
-    pipe.style.left = '${pipePosition}px';
+        // Cambia la imagen a Game Over y ajusta su tamaño
+        mario.src = './images/game-over.png';
+        mario.style.width = '75px';
+        mario.style.marginLeft = '50px';
 
-    mario.style.animation = 'none';
-    mario.style.left = '${marioPosition}px';
-
-    mario.src = './images/game-over.png';
-    mario.style.width = '75px'
-    mario.style.marginlef = '50px'
-
-    clearinterval(loop)
-
-}
-
+        // Detiene el bucle del juego
+        clearInterval(loop);
+    }
 }, 10);
 
-documet.addEventListener{'keydom', jump}
+document.addEventListener('keydown', jump);
