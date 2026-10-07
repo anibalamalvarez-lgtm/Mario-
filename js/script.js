@@ -2,19 +2,18 @@ const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 
 const jump = () => {
-
-    if (mario.classList.contains('jump')) return;
-
     mario.classList.add('jump');
 
     setTimeout(() => {
         mario.classList.remove('jump');
     }, 500);
-};
+}
 
 const loop = setInterval(() => {
-    const pipePosition = pipe.offsetLeft;
 
+    console.log('loop')
+
+    const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
@@ -31,6 +30,7 @@ const loop = setInterval(() => {
 
         clearInterval(loop);
     }
+    
 }, 10);
 
 document.addEventListener('keydown', jump);

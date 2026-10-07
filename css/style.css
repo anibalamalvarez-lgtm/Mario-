@@ -5,9 +5,9 @@
 }
 
 .game-board {
-    width: 80%;
+    width: 100%;
     height: 500px;
-    border: 1px solid #333;
+    border-bottom: 15px solid rgb(35, 160, 35);
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -25,7 +25,7 @@
     width: 150px;
     position: absolute;
     bottom: 0;
-    animation: jump 500ms;
+    animation: jump 500ms infinite ease-out;
 }
 
 .jump {
@@ -34,22 +34,21 @@
 
 .cloud {
     position: absolute;
-    top: 50px; /* Agregado: Ubica la nube en la parte superior */
+    top: 50px; 
     width: 550px;
     animation: clouds-animation 20s infinite linear;
 }
 
-/* Animación del tubo */
 @keyframes pipe-animation {
     from {
         right: -80px;
     }
+
     to {
         right: 100%;
     }   
 }
 
-/* Animación del salto de Mario */
 @keyframes jump {
     0% {
         bottom: 0;
@@ -70,7 +69,6 @@
     }
 }
 
-/* Animación de las nubes */
 @keyframes clouds-animation {
     from {
         right: -550px;
